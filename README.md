@@ -1,0 +1,1 @@
+This is an web based wallet for solana 
