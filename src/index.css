@@ -346,6 +346,14 @@ body {
   color: var(--accent);
 }
 
+.mnemonic-placeholder {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 input,
 textarea,
 select {
