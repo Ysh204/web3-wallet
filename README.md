@@ -63,10 +63,6 @@ web3-wallet/
     └── vite-env.d.ts     # TypeScript ambient declarations
 ```
 
-> See **[ARCHITECTURE.md](./ARCHITECTURE.md)** for a detailed file-by-file explanation of every module, its core logic, and how data flows through the app.
-
----
-
 ## How It Works (High Level)
 
 ```
