@@ -1,27 +1,19 @@
-/* ── Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ── Design Tokens ── */
 :root {
   --bg-deep: #050505;
   --bg-surface: rgba(20, 20, 25, 0.6);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-highlight: rgba(255, 255, 255, 0.05);
 
-  /* Bright Neon Accents */
   --accent: #00f0ff;
-  /* Cyan Neon */
   --accent-secondary: #7000ff;
-  /* Electric Purple */
   --accent-glow: rgba(0, 240, 255, 0.4);
   --accent-gradient: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
 
   --success: #00ff9d;
-  /* Neon Green */
   --warning: #ffbf00;
-  /* Bright Amber */
   --danger: #ff0055;
-  /* Neon Red */
 
   --text-primary: #ffffff;
   --text-secondary: #a0a0b0;
@@ -36,7 +28,6 @@
   color-scheme: dark;
 }
 
-/* ── Reset ── */
 *,
 *::before,
 *::after {
@@ -48,14 +39,10 @@
 body {
   font-family: var(--sans);
   background: #030005;
-  /* Deep purple-black */
   background-image:
     radial-gradient(circle at 50% -20%, rgba(124, 58, 237, 0.15), transparent 60%),
-    /* Purple top glow */
     radial-gradient(circle at 100% 50%, rgba(139, 92, 246, 0.08), transparent 50%),
-    /* Violet right */
     radial-gradient(circle at 0% 50%, rgba(76, 29, 149, 0.05), transparent 50%);
-  /* Deep purple left */
   background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
@@ -63,13 +50,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Layout ── */
 .app {
   max-width: 680px;
   margin: 0 auto;
 }
 
-/* ── Header ── */
 .app-header {
   text-align: center;
   margin-bottom: 40px;
@@ -136,7 +121,6 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* ── Glass Card ── */
 .card {
   background: var(--bg-surface);
   border: 1px solid var(--glass-border);
@@ -184,7 +168,6 @@ body {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
-/* ── Buttons ── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -253,11 +236,9 @@ body {
 .btn-row {
   display: flex;
   gap: 16px;
-  /* Increased from 12px */
   flex-wrap: wrap;
 }
 
-/* ── Toggle ── */
 .word-count-toggle {
   display: inline-flex;
   padding: 4px;
@@ -291,7 +272,6 @@ body {
   color: var(--text-primary);
 }
 
-/* ── Security ── */
 .security-warn {
   display: flex;
   align-items: flex-start;
@@ -306,7 +286,6 @@ body {
   line-height: 1.6;
 }
 
-/* ── Mnemonic ── */
 .mnemonic-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -367,7 +346,6 @@ body {
   color: var(--accent);
 }
 
-/* ── Inputs ── */
 input,
 textarea,
 select {
@@ -389,7 +367,6 @@ textarea:focus {
   box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.1) !important;
 }
 
-/* ── Account Grid ── */
 .account-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -440,7 +417,6 @@ textarea:focus {
   margin-top: 4px;
 }
 
-/* ── Status Toast ── */
 .status-bar {
   position: fixed;
   bottom: 24px;
@@ -493,7 +469,6 @@ textarea:focus {
   border-color: rgba(0, 240, 255, 0.3);
 }
 
-/* ── Modal ── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -515,7 +490,6 @@ textarea:focus {
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
 }
 
-/* ── Utils ── */
 .derive-row {
   display: flex;
   align-items: center;
@@ -537,7 +511,6 @@ textarea:focus {
   font-size: 0.8rem;
 }
 
-/* ── Animations ── */
 @keyframes pulse {
 
   0%,
@@ -562,7 +535,6 @@ textarea:focus {
   }
 }
 
-/* ── Responsive ── */
 @media (max-width: 600px) {
   .account-grid {
     grid-template-columns: 1fr;
