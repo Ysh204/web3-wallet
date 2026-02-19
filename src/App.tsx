@@ -13,10 +13,10 @@ import {
 
 const ALCHEMY_URL = import.meta.env.VITE_ALCHEMY_URL || clusterApiUrl('devnet');
 
-/* ── Types ── */
+
 type StatusKind = '' | 'success' | 'error' | 'loading'
 
-/* ── Helpers ── */
+
 function statusClass(kind: StatusKind) {
     if (kind === 'success') return 'status-bar status-success'
     if (kind === 'error') return 'status-bar status-error'
@@ -24,7 +24,6 @@ function statusClass(kind: StatusKind) {
     return 'status-bar'
 }
 
-/* ── Component ── */
 export default function App() {
     const [mnemonic, setMnemonic] = useState('')
     const [index, setIndex] = useState(0)
@@ -44,19 +43,19 @@ export default function App() {
     const keypairRef = useRef<Keypair | null>(null)
     const connRef = useRef(new Connection(networkRpc, 'confirmed'))
 
-    /* ── Status helpers ── */
+
     const info = (msg: string) => { setStatus(msg); setStatusKind('') }
     const success = (msg: string) => { setStatus(msg); setStatusKind('success') }
     const error = (msg: string) => { setStatus(msg); setStatusKind('error') }
     const loading = (msg: string) => { setStatus(msg); setStatusKind('loading') }
 
-    /* ── Network change ── */
+
     useEffect(() => {
         connRef.current = new Connection(networkRpc, 'confirmed')
         if (pubkey) fetchBalance(pubkey)
     }, [networkRpc])
 
-    /* ── Generate mnemonic ── */
+
     const generateMnemonic = () => {
         const entropy = wordCount === 12 ? 128 : 256
         const m = bip39.generateMnemonic(entropy)
@@ -66,7 +65,7 @@ export default function App() {
         setTimeout(() => deriveAccount(m, 0), 50)
     }
 
-    /* ── Import modal ── */
+
     const openImportModal = () => {
         setImportText('')
         setImportError('')
@@ -85,7 +84,7 @@ export default function App() {
         deriveAccount(trimmed, index)
     }
 
-    /* ── Derive ── */
+
     const deriveAccount = async (words: string, acctIndex: number) => {
         loading('Deriving account…')
         try {
@@ -105,7 +104,7 @@ export default function App() {
         }
     }
 
-    /* ── Balance ── */
+
     const fetchBalance = async (pub: string) => {
         try {
             setBalance('…')
@@ -117,7 +116,7 @@ export default function App() {
         }
     }
 
-    /* ── Index change ── */
+
     const handleIndexChange = async (val: string) => {
         const i = Math.max(0, Math.floor(Number(val) || 0))
         setIndex(i)
@@ -129,7 +128,7 @@ export default function App() {
         }
     }
 
-    /* ── Send SOL ── */
+
     const sendSol = async () => {
         if (!keypairRef.current) { error('No derived keypair.'); return }
         if (!recipient) { error('Recipient required.'); return }
@@ -161,7 +160,7 @@ export default function App() {
         }
     }
 
-    /* ── Clipboard ── */
+
     const copyToClipboard = async (text: string, setCopied: (v: boolean) => void) => {
         try {
             await navigator.clipboard.writeText(text)
@@ -173,7 +172,7 @@ export default function App() {
         }
     }
 
-    /* ── Components ── */
+
     const CopyButton = ({ text }: { text: string }) => {
         const [copied, setCopied] = useState(false)
         return (
@@ -183,12 +182,11 @@ export default function App() {
         )
     }
 
-    /* ── Airdrop ── */
+
     const requestAirdrop = async () => {
         if (!pubkey) { error('No public key.'); return }
         try {
             loading('Requesting airdrop (1 SOL)…')
-            // Always use the public devnet RPC for airdrops — third-party RPCs (Alchemy, etc.) don't support requestAirdrop
             const devnetConn = new Connection(clusterApiUrl('devnet'), 'confirmed')
             const sig = await devnetConn.requestAirdrop(new PublicKey(pubkey), LAMPORTS_PER_SOL)
             await devnetConn.confirmTransaction(sig, 'confirmed')
@@ -200,20 +198,19 @@ export default function App() {
         }
     }
 
-    /* ── Auto-derive on mount ── */
+
     useEffect(() => {
         if (mnemonic && bip39.validateMnemonic(mnemonic)) {
             deriveAccount(mnemonic, index)
         }
     }, [])
 
-    /* ── Mnemonic words ── */
+
     const words = mnemonic ? mnemonic.split(' ') : []
 
-    /* ──────── RENDER ──────── */
     return (
         <div className="app">
-            {/* Header */}
+
             <header className="app-header">
                 <h1>Solana Wallet</h1>
                 <p className="subtitle">Dev & testing only — do not use for mainnet funds</p>
@@ -226,7 +223,6 @@ export default function App() {
                 </div>
             </header>
 
-            {/* Seed Section */}
             <section className="card">
                 <h2 className="card-title">Seed Phrase</h2>
 
@@ -277,7 +273,7 @@ export default function App() {
                 </div>
             </section>
 
-            {/* Account Section */}
+
             <section className="card">
                 <h2 className="card-title">Account</h2>
                 <div className="derive-row">
@@ -326,7 +322,6 @@ export default function App() {
                 </div>
             </section>
 
-            {/* Send Section */}
             <section className="card">
                 <h2 className="card-title">Send SOL</h2>
                 <div className="send-form">
@@ -356,7 +351,7 @@ export default function App() {
                 </div>
             </section>
 
-            {/* Status */}
+
             {status && (
                 <div className={statusClass(statusKind)}>
                     <span className="status-dot" />
@@ -364,7 +359,6 @@ export default function App() {
                 </div>
             )}
 
-            {/* Import Modal */}
             {showImportModal && (
                 <div className="modal-overlay" onClick={() => setShowImportModal(false)}>
                     <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -384,10 +378,7 @@ export default function App() {
                 </div>
             )}
 
-            {/* Footer */}
-            <footer className="app-footer">
-                Built with @solana/web3.js · bip39 · @noble/hashes — by YashGaikwad
-            </footer>
+
         </div>
     )
 }
