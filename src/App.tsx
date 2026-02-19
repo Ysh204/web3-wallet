@@ -11,7 +11,7 @@ import {
     clusterApiUrl,
 } from '@solana/web3.js'
 
-const ALCHEMY_URL = import.meta.env.VITE_ALCHEMY_URL;
+const ALCHEMY_URL = import.meta.env.VITE_ALCHEMY_URL || clusterApiUrl('devnet');
 
 /* ── Types ── */
 type StatusKind = '' | 'success' | 'error' | 'loading'
