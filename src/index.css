@@ -346,7 +346,6 @@ body {
   color: var(--accent);
 }
 
-<<<<<<< HEAD
 .mnemonic-placeholder {
   color: var(--text-secondary);
   font-size: 1.1rem;
@@ -355,8 +354,6 @@ body {
   margin-bottom: 20px;
 }
 
-=======
->>>>>>> 1030d728e4f465c624ebc472fc5f1d586be66f55
 input,
 textarea,
 select {
